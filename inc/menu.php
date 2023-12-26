@@ -105,7 +105,7 @@ class minDefSkin_menu {
 
     global $DIC;
     $html = minDefSkin_layout::apply_custom_placeholders($html);
-    $is_login_page = strpos($_SERVER['REQUEST_URI'], "login.php") !== false;
+    $is_login_page = strpos($_SERVER['REQUEST_URI'], "login.php") !== false || strtolower($_GET['cmdClass']) == "ilstartupgui" || strtolower($_GET['baseClass']) == "ilstartupgui";
 
     $dom = new DomDocument();
     $internalErrors = libxml_use_internal_errors(true);

@@ -1,3 +1,6 @@
-learn_more#:#En savoir plus
-completed#:#Complété
-time_spent#:#Temps passé
+settings#:#Paramètres du skin
+title_long#:#Nom de l'établissement
+title_short#:#Payoff / brève description
+logo_image#:#Logo de l'établissement (png)
+login_image#:#Image de la page de connexion (jpg)
+configuration_saved#:#Configuration enregistrée

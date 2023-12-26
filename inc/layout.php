@@ -12,9 +12,14 @@ class minDefSkin_layout
     {
         global $DIC;
         $user = $DIC->user();
-
+        
         $body_class = [];
         
+        $is_login_page = strpos($_SERVER['REQUEST_URI'], "login.php") !== false;
+        if ($is_login_page) {
+            $body_class[] = "is_login";
+        }
+
         if (minDefSkin_tabs::getRootCourse($_GET['ref_id']) !== false) {
             $body_class[] = "is_course";
         }
@@ -63,6 +68,25 @@ class minDefSkin_layout
             $file_path = './minarm_logo.png';
             if (file_exists($file_path)) {
                 $html = str_replace($placeholder, '<img class="custom-logo" src="' . $file_path . '" title="Logo" />', $html);
+            }
+        }
+    
+        return $html;
+    }
+
+    public static function add_login_thumbnail($html)
+    {
+        /* not possible to use xpath here without breaking ILIAS */
+        $placeholder = '{LOGIN_THUMBNAIL}';
+        $placeholder_status = '{LOGIN_THUMBNAIL_STATUS}';
+        if (strpos($html, $placeholder) !== false || strpos($html, $placeholder_status) !== false) {
+            $file_path = './minarm_login.jpg';
+            if (file_exists($file_path)) {
+                $html = str_replace($placeholder, '<img class="login-thumbnail" src="' . $file_path . '" />', $html);
+                $html = str_replace($placeholder_status, 'visible', $html);
+            } else {
+                $html = str_replace($placeholder, '<img class="login-thumbnail" src="' . $file_path . '" />', $html);
+                $html = str_replace($placeholder_status, 'hidden', $html);
             }
         }
     

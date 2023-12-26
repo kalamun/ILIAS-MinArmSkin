@@ -105,6 +105,7 @@ class minDefSkin_menu {
 
     global $DIC;
     $html = minDefSkin_layout::apply_custom_placeholders($html);
+    $is_login_page = strpos($_SERVER['REQUEST_URI'], "login.php") !== false;
 
     $dom = new DomDocument();
     $internalErrors = libxml_use_internal_errors(true);
@@ -115,7 +116,7 @@ class minDefSkin_menu {
     foreach ($finder->query('//form[contains(@id, "mm_search_form")]') as $menu_element) {
       $div_container = $menu_element->parentNode->parentNode->parentNode;
       $li = $div_container->parentNode;
-      $li->appendChild($menu_element);
+      if (!$is_login_page) $li->appendChild($menu_element);
       $li->removeChild($div_container);
       $li->setAttribute('class', $li->getAttribute("class") . " search");
 
@@ -135,7 +136,7 @@ class minDefSkin_menu {
     $html = str_replace('<?xml encoding="utf-8" ?>', "", $dom->saveHTML());
 
     // always display inbox link
-    if (strpos($html, "glyphicon-bell") === false) {
+    if (!$is_login_page && strpos($html, "glyphicon-bell") === false) {
       $inbox_link = "/ilias.php?baseClass=ilMailGUI";
       $inbox_html = '<li role="none">
       <button class="btn btn-bulky disengaged" id="il_ui_fw_65779a1a93bf23_59226524" role="menuitem" aria-haspopup="true" aria-expanded="false">

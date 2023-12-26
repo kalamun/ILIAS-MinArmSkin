@@ -75,6 +75,11 @@ class ilMinDefSkinUIHookGUI extends ilUIHookPluginGUI {
         $html = minDefSkin_layout::remove_breadcrumbs($html);
       }
       
+      /* login */
+      if($a_part == "template_add" && strpos($a_par["tpl_id"], "tpl.login.html") !== false) {
+        $html = minDefSkin_layout::add_login_thumbnail($html);
+      }
+      
       /* menu */
       if($a_part == "template_get" && $a_par["tpl_id"] == "src/UI/templates/default/MainControls/tpl.mainbar.html") {
         $html = minDefSkin_menu::apply_mainbar($html);

@@ -36,7 +36,8 @@ class minDefSkin_layout
         $html = str_replace("{HOMEPAGE_URL}", "/goto.php?target=root_1&client_id=default", $html);
         $html = str_replace("{LANGUAGE_SELECTOR}", minDefSkin_menu::get_language_selector(), $html);
         
-        $menu_orientation = $DIC['ilias']->getSetting("menu_orientation") ?? "vertical";
+        $menu_orientation = $DIC['ilias']->getSetting("menu_orientation");
+        if (empty($menu_orientation)) $menu_orientation = "vertical";
         $html = str_replace("{MENU_ORIENTATION}", $menu_orientation, $html);
         
         $title_long = $DIC['ilias']->getSetting("inst_name");

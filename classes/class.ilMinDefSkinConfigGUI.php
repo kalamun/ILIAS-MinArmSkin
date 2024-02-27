@@ -53,6 +53,7 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
 
         $title_long = $DIC['ilias']->getSetting("inst_name");
         $title_short = $DIC['ilias']->getSetting("short_inst_name");
+        $menu_orientation = $DIC['ilias']->getSetting("menu_orientation") ?? "vertical";
 
 		require_once("./Services/Form/classes/class.ilPropertyFormGUI.php");
 		$form = new ilPropertyFormGUI();
@@ -67,6 +68,15 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
         $title_short_input->setValue($title_short);
         $form->addItem($title_short_input);
         
+        $menu_orientation_input = new ilSelectInputGUI($this->lng->txt("menu_orientation", true), "menu_orientation");
+        $menu_orientation_input->setRequired(true);
+        $menu_orientation_input->setOptions([
+            "vertical" => $this->lng->txt("menu_orientation_vertical", true),
+            "horizontal" => $this->lng->txt("menu_orientation_horizontal", true),
+        ]);
+        $menu_orientation_input->setValue($menu_orientation);
+        $form->addItem($menu_orientation_input);
+
         $logo_image = new ilImageFileInputGUI($this->plugin->txt("logo_image", true), 'logo_image');
         $logo_image->setAllowDeletion(false);
         $image_url = './minarm_logo.png';
@@ -97,6 +107,9 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
         }
         if (isset($_POST['title_short'])) {
             $DIC['ilias']->setSetting("short_inst_name", trim($_POST['title_short']));  
+        }
+        if (isset($_POST['menu_orientation'])) {
+            $DIC['ilias']->setSetting("menu_orientation", trim($_POST['menu_orientation']));  
         }
 
         if (!empty($_FILES['logo_image']['name'])) {

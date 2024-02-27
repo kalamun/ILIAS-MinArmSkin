@@ -4,3 +4,6 @@ title_short#:#Payoff / brève description
 logo_image#:#Logo de l'établissement (png)
 login_image#:#Image de la page de connexion (jpg)
 configuration_saved#:#Configuration enregistrée
+menu_orientation#:#Menu orientation
+menu_orientation_vertical#:#Vertical
+menu_orientation_horizontal#:#Horizontal

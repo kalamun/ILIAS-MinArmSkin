@@ -4,3 +4,6 @@ title_short#:#Motto / descrizione breve
 logo_image#:#Logo dell'istituzione (png)
 login_image#:#Immagine della pagina di login (jpg)
 configuration_saved#:#Impostazioni salvate
+menu_orientation#:#Disposizione del menù
+menu_orientation_vertical#:#Verticale
+menu_orientation_horizontal#:#Orizzontale

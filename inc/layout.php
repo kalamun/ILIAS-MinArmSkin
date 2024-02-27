@@ -13,26 +13,31 @@ class minDefSkin_layout
         global $DIC;
         $user = $DIC->user();
         
-        $body_class = [];
-        
-        $is_login_page = strpos($_SERVER['REQUEST_URI'], "login.php") !== false || strtolower($_GET['cmdClass']) == "ilstartupgui" || strtolower($_GET['baseClass']) == "ilstartupgui";
-        if ($is_login_page) {
-            $body_class[] = "is_login";
+        if (strpos($html, "{BODY_CLASS}") !== false) {
+            $body_class = [];
+            
+            $is_login_page = strpos($_SERVER['REQUEST_URI'], "login.php") !== false || strtolower($_GET['cmdClass']) == "ilstartupgui" || strtolower($_GET['baseClass']) == "ilstartupgui";
+            if ($is_login_page) {
+                $body_class[] = "is_login";
+            }
+    
+            if (minDefSkin_tabs::getRootCourse($_GET['ref_id']) !== false) {
+                $body_class[] = "is_course";
+            }
+            
+            if ($_GET['cmdClass'] == "ilmailfoldergui" || $_GET['cmdClass'] == "showMail") {
+                $body_class[] = "is_inbox";
+            }
+    
+            $html = str_replace("{BODY_CLASS}", implode(" ", $body_class), $html);
         }
 
-        if (minDefSkin_tabs::getRootCourse($_GET['ref_id']) !== false) {
-            $body_class[] = "is_course";
-        }
-        
-        if ($_GET['cmdClass'] == "ilmailfoldergui" || $_GET['cmdClass'] == "showMail") {
-            $body_class[] = "is_inbox";
-        }
-
-        $html = str_replace("{BODY_CLASS}", implode(" ", $body_class), $html);
         $html = str_replace("{SKIN_URI}", "/Customizing/global/skin/minarm", $html);
         $html = str_replace("{HOMEPAGE_URL}", "/goto.php?target=root_1&client_id=default", $html);
-
         $html = str_replace("{LANGUAGE_SELECTOR}", minDefSkin_menu::get_language_selector(), $html);
+        
+        $menu_orientation = $DIC['ilias']->getSetting("menu_orientation") ?? "vertical";
+        $html = str_replace("{MENU_ORIENTATION}", $menu_orientation, $html);
         
         $title_long = $DIC['ilias']->getSetting("inst_name");
         $html = str_replace("{MAIN_TITLE}", $title_long, $html);
@@ -70,7 +75,7 @@ class minDefSkin_layout
                 $html = str_replace($placeholder, '<img class="custom-logo" src="' . $file_path . '" title="Logo" />', $html);
             }
         }
-    
+
         return $html;
     }
 

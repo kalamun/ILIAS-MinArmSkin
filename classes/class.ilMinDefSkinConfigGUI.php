@@ -68,11 +68,11 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
         $title_short_input->setValue($title_short);
         $form->addItem($title_short_input);
         
-        $menu_orientation_input = new ilSelectInputGUI($this->lng->txt("menu_orientation", true), "menu_orientation");
+        $menu_orientation_input = new ilSelectInputGUI($this->plugin->txt("menu_orientation", true), "menu_orientation");
         $menu_orientation_input->setRequired(true);
         $menu_orientation_input->setOptions([
-            "vertical" => $this->lng->txt("menu_orientation_vertical", true),
-            "horizontal" => $this->lng->txt("menu_orientation_horizontal", true),
+            "vertical" => $this->plugin->txt("menu_orientation_vertical", true),
+            "horizontal" => $this->plugin->txt("menu_orientation_horizontal", true),
         ]);
         $menu_orientation_input->setValue($menu_orientation);
         $form->addItem($menu_orientation_input);

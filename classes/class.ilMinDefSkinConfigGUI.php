@@ -1,9 +1,11 @@
 <?php
-
 /**
- * Config screen
+ * Class ilMinDefSkinConfigGUI
+ * @author            Roberto Pasini <bonjour@kalamun.net>
+ * @ilCtrl_IsCalledBy ilMinDefSkinConfigGUI: ilObjComponentSettingsGUI
  */
-class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
+
+ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
 
     const PLUGIN_CLASS_NAME = ilMinDefSkinPlugin::class;
     const CMD_CONFIGURE = "configure";
@@ -17,6 +19,8 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
     protected $user;
     protected $ctrl;
     protected $object;
+    protected $tpl;
+    protected $ui;
   
     public function __construct()
     {
@@ -24,14 +28,15 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
       $this->dic = $DIC;
       $this->plugin = ilMinDefSkinPlugin::getInstance();
       $this->lng = $this->dic->language();
-      // $this->lng->loadLanguageModule("assessment");
       $this->request = $this->dic->http()->request();
       $this->user = $this->dic->user();
       $this->ctrl = $this->dic->ctrl();
       $this->object = $this->dic->object();
+      $this->ui = $this->dic->ui();
+      $this->tpl = $this->dic['tpl'];
     }
     
-    public function performCommand(/*string*/ $cmd)/*:void*/
+    public function performCommand(string $cmd):void
     {
         $this->plugin = $this->getPluginObject();
 
@@ -47,7 +52,7 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
 		}
     }
 
-    protected function configure()/*: void*/
+    protected function configure(): void
     {
         global $tpl, $ilCtrl, $lng, $DIC;
 
@@ -98,7 +103,7 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
 		$tpl->setContent($form->getHTML());
     }
 
-    protected function updateConfigure()/*: void*/
+    protected function updateConfigure(): void
     {
         global $lng, $DIC;
 
@@ -119,9 +124,9 @@ class ilMinDefSkinConfigGUI extends ilPluginConfigGUI {
             move_uploaded_file($_FILES["login_image"]["tmp_name"], './minarm_login.jpg');
         }
 
-        self::configure();
-
-        ilUtil::sendSuccess($this->plugin->txt("configuration_saved"), true);
-
+        $box_factory = $this->ui->factory()->messageBox();
+        $box = $box_factory->success($this->plugin->txt("configuration_saved"));
+        $htmlMessage = $this->ui->renderer()->render($box);
+        self::configure($htmlMessage);
     }
 }

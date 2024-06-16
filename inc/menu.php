@@ -19,7 +19,7 @@ class minDefSkin_menu {
     // LANGUAGE MENU
     $current_language = $DIC->language()->getContentLanguage();
     $available_languages = $DIC->language()->getInstalledLanguages();
-    $query_variables = parse_url($_SERVER['REQUEST_URI'])['query'];
+    $query_variables = $_SERVER['QUERY_STRING']; //parse_url($_SERVER['REQUEST_URI'])['query'];
 
     $language_labels = [
       "en" => "English",

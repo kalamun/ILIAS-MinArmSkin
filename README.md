@@ -1,11 +1,11 @@
-# ILIAS MinArm-skin Plugin ILIAS v8
+# ILIAS MinDef-skin Plugin ILIAS v8
 
 This plugin for ILIAS LMS (ilias.de) is used in combination with the MinArm-skin to add custom features.
 This plugin is developed by Kalamun (https://kalamun.net).
 
 ## Installation
 
-### Install the MinArm-skin Plugin
+### Install the MinDef-skin Plugin
 Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/UIComponent/UserInterfaceHook

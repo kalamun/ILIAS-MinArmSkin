@@ -2,7 +2,6 @@
 include_once("./Services/Object/classes/class.ilObjectGUI.php");
 require_once(__DIR__ . "/../inc/footer.php");
 require_once(__DIR__ . "/../inc/layout.php");
-require_once(__DIR__ . "/../inc/tabs.php");
 require_once(__DIR__ . "/../inc/menu.php");
 
 /**
@@ -53,7 +52,7 @@ class ilMinDefSkinUIHookGUI extends ilUIHookPluginGUI {
 	 *
 	 * @return array array with entries "mode" => modification mode, "html" => your html
 	 */
-	function getHTML($a_comp = false, $a_part = false, $a_par = array()) {
+	function getHTML(string $a_comp = "", string $a_part = "", array $a_par = []):array {
     global $tpl;  
     global $DIC;
     
@@ -104,16 +103,5 @@ class ilMinDefSkinUIHookGUI extends ilUIHookPluginGUI {
 
     return ["mode" => ilUIHookPluginGUI::KEEP, "html" => ""];
   }
-
-
-  /**
-	 * Modify GUI objects, before they generate ouput
-	 *
-	 * @param string $a_comp component
-	 * @param string $a_part string that identifies the part of the UI that is handled
-	 * @param string $a_par array of parameters (depend on $a_comp and $a_part)
-	 */
-  function modifyGUI($a_comp, $a_part, $a_par = array()) {
-	}
 
 }

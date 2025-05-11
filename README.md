@@ -1,6 +1,6 @@
-# ILIAS MinDef-skin Plugin
+# ILIAS MinDef-skin Plugin ILIAS v8
 
-This plugin for ILIAS LMS (ilias.de) need to be used with the MinDef-skin to add him custom features.
+This plugin for ILIAS LMS (ilias.de) is used in combination with the MinArm-skin to add custom features.
 This plugin is developed by Kalamun (https://kalamun.net).
 
 ## Installation
@@ -15,8 +15,8 @@ git clone https://github.com/kalamun/ILIAS-MinArmSkin.git MinDefSkin
 Update and activate the plugin in the ILIAS Plugin Administration
 
 ### Requirements
-* ILIAS >= 7.0
-* PHP >= 7.0
+* ILIAS >= 8.0
+* PHP >= 8.0
 
 ### Support
 * Bug reports and feature requests: open a ticket in https://github.com/kalamun/ILIAS-MinArmSkin/issues

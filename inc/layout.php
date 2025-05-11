@@ -3,8 +3,6 @@
  * Generic layout functions
  */
 
-require_once __DIR__ . "/tabs.php";
-
 class minDefSkin_layout
 {
 
@@ -21,10 +19,6 @@ class minDefSkin_layout
                 $body_class[] = "is_login";
             }
     
-            if (minDefSkin_tabs::getRootCourse($_GET['ref_id']) !== false) {
-                $body_class[] = "is_course";
-            }
-            
             if ($_GET['cmdClass'] == "ilmailfoldergui" || $_GET['cmdClass'] == "showMail") {
                 $body_class[] = "is_inbox";
             }
